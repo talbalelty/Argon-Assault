@@ -28,7 +28,6 @@ public class CollisionHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Ship trigger");
         StartCoroutine(StartCrashSequence());
     }
 

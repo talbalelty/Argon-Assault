@@ -253,8 +253,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathVFX: {fileID: 3200836327345539238, guid: a032c84d7c7d9b64099c7ddc8ac41268, type: 3}
+  hitVFX: {fileID: 3200836327345539238, guid: 9b9005ed6d123ac4896023bf47ce5c55, type: 3}
   parent: {fileID: 2030421778}
   scoreAmount: 5
+  health: 5
 --- !u!1 &519432968
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,8 +592,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathVFX: {fileID: 3200836327345539238, guid: a032c84d7c7d9b64099c7ddc8ac41268, type: 3}
+  hitVFX: {fileID: 3200836327345539238, guid: 9b9005ed6d123ac4896023bf47ce5c55, type: 3}
   parent: {fileID: 2030421778}
   scoreAmount: 10
+  health: 2
 --- !u!4 &2030421778 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6673941906194281046, guid: 018e0b7a0d229c64c8440144855c2acd, type: 3}
