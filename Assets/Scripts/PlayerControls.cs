@@ -4,36 +4,51 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// This Script uses Unity's new Input System
 public class PlayerControls : MonoBehaviour
 {
-    [SerializeField] InputAction movement;
-    [SerializeField] InputAction fire;
+    [Header("General Setup Settings")]
+    [Tooltip("How fast the ship moves across the screen")]
     [SerializeField] float offsetSpeed = 20f;
+    [Tooltip("Right and left borders of moveable area")]
     [SerializeField] float xRange = 12f;
+    [Tooltip("Top and bottum borders of moveable area")]
     [SerializeField] float yRange = 8f;
-    [SerializeField] float pitchFactor = -2f;
-    [SerializeField] float dyPitchFactor = -10f;
-    [SerializeField] float yawFactor = 3f;
-    [SerializeField] float dxRollFactor = -30f;
+    [Tooltip("Ship's weapons ParticleSystem")]
+    [SerializeField] GameObject[] lasers;
 
-    private float dx, dy;
-    private float xOffset, yOffset;
-    private float pitch, yaw, roll;
+    [Header("Screen Position Based Settings")]
+    [Tooltip("Amount of pitch the ship will have relative to local position")]
+    [SerializeField] float pitchFactor = -2f;
+    [Tooltip("Amount of yaw the ship will have relative to local position")]
+    [SerializeField] float yawFactor = 3f;
+
+    [Header("Player Input Based Settings")]
+    [Tooltip("Amount of temporary roll the ship will have relative to input")]
+    [SerializeField] float dxRollFactor = -30f;
+    [Tooltip("Amount of temporary pitch the ship will have relative to input")]
+    [SerializeField] float dyPitchFactor = -10f;
+
+    Vector2 movement;
+    bool isFiring;
+    float dx, dy;
+    float xOffset, yOffset;
+    float pitch, yaw, roll;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
-    private void OnEnable()
+    void OnMovement(InputValue value)
     {
-        movement.Enable();
+        movement = value.Get<Vector2>();
     }
 
-    private void OnDisable()
+    void OnFire(InputValue value)
     {
-        movement.Disable();
+        isFiring = value.isPressed;
     }
 
     // Update is called once per frame
@@ -41,6 +56,16 @@ public class PlayerControls : MonoBehaviour
     {
         ProcessTranslation();
         ProcessRotation();
+        ProcessFiring();
+    }
+
+    private void ProcessFiring()
+    {
+        foreach (GameObject laser in lasers)
+        {
+            var emissionModule = laser.GetComponent<ParticleSystem>().emission;
+            emissionModule.enabled = isFiring;
+        }
     }
 
     private void ProcessRotation()
@@ -57,8 +82,8 @@ public class PlayerControls : MonoBehaviour
     private void ProcessTranslation()
     {
         // read press value [-1,1]
-        dx = movement.ReadValue<Vector2>().x;
-        dy = movement.ReadValue<Vector2>().y;
+        dx = movement.x;
+        dy = movement.y;
 
         // calculate new ship position compared to local position
         xOffset = dx * offsetSpeed * Time.deltaTime + transform.localPosition.x;
