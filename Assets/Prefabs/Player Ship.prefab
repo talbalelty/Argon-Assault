@@ -3679,10 +3679,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Right Laser
       objectReference: {fileID: 0}
-    - target: {fileID: 5940432055500884106, guid: 17a0649b00fad0e458fad1d5c1d4f9a9, type: 3}
-      propertyPath: CustomDataModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8085391888389315602, guid: 17a0649b00fad0e458fad1d5c1d4f9a9, type: 3}
       propertyPath: m_RootOrder
       value: 26
