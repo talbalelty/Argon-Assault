@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // ParticleSystem destroys itself after spawning
@@ -10,11 +8,5 @@ public class SelfDestruct : MonoBehaviour
     void Start()
     {
         Destroy(gameObject, timeTillDestroy);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

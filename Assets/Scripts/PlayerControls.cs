@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -35,12 +32,6 @@ public class PlayerControls : MonoBehaviour
     float xOffset, yOffset;
     float pitch, yaw, roll;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     void OnMovement(InputValue value)
     {
         movement = value.Get<Vector2>();
@@ -64,7 +55,8 @@ public class PlayerControls : MonoBehaviour
         foreach (GameObject laser in lasers)
         {
             var emissionModule = laser.GetComponent<ParticleSystem>().emission;
-            emissionModule.enabled = isFiring;
+            emissionModule.enabled = isFiring; // playOnAwake and Loop are both enabled
+            laser.GetComponent<AudioSource>().enabled = isFiring; // playOnAwake and Loop are both enabled
         }
     }
 
@@ -93,6 +85,7 @@ public class PlayerControls : MonoBehaviour
         xOffset = Mathf.Clamp(xOffset, -xRange, xRange);
         yOffset = Mathf.Clamp(yOffset, -yRange, yRange);
 
+        // Move to new position
         transform.localPosition = new Vector3(xOffset, yOffset, transform.localPosition.z);
     }
 }

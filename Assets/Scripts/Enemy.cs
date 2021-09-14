@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -21,12 +19,6 @@ public class Enemy : MonoBehaviour
         rb.useGravity = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void OnParticleCollision(GameObject other)
     {
         ProcessHit(other);
@@ -34,6 +26,13 @@ public class Enemy : MonoBehaviour
         {
             ProcessKill();
         }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        GameObject fx = Instantiate(deathFX, transform.position, Quaternion.identity);
+        fx.transform.parent = parentGameObject.transform; // organize all explosions as children
+        Destroy(gameObject);
     }
 
     void ProcessHit(GameObject other)

@@ -1,29 +1,18 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
     [SerializeField] float loadDelay = 1f;
-    [SerializeField] ParticleSystem crashExplosionVFX;
+    [SerializeField] GameObject crashExplosionFX;
+
+    GameObject parentGameObject;
 
     // Start is called before the first frame update
     void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        Debug.Log("Ship collision");
+        parentGameObject = GameObject.FindWithTag("SpawnAtRuntime");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,10 +23,8 @@ public class CollisionHandler : MonoBehaviour
     IEnumerator StartCrashSequence()
     {
         GetComponent<PlayerControls>().enabled = false;
-        if (!crashExplosionVFX.isPlaying)
-        {
-            crashExplosionVFX.Play();
-        }
+        GameObject fx = Instantiate(crashExplosionFX, transform.position, Quaternion.identity);
+        fx.transform.parent = parentGameObject.transform;
 
         // depends on the ship Prefab, the ship and it's colliders will disapear leaving the explosion behind
         MeshRenderer shipRenderer;
