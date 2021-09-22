@@ -481,8 +481,8 @@ MonoBehaviour:
   - {fileID: 2872873880128325495}
   pitchFactor: -1
   yawFactor: 2
-  dxRollFactor: -30
-  dyPitchFactor: -10
+  dxRollFactor: -20
+  dyPitchFactor: -5
 --- !u!114 &8404319017316331629
 MonoBehaviour:
   m_ObjectHideFlags: 0

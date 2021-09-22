@@ -22,9 +22,9 @@ public class PlayerControls : MonoBehaviour
 
     [Header("Player Input Based Settings")]
     [Tooltip("Amount of temporary roll the ship will have relative to input")]
-    [SerializeField] float dxRollFactor = -30f;
+    [SerializeField] float dxRollFactor = -20f;
     [Tooltip("Amount of temporary pitch the ship will have relative to input")]
-    [SerializeField] float dyPitchFactor = -10f;
+    [SerializeField] float dyPitchFactor = -5f;
 
     Vector2 movement;
     bool isFiring;
